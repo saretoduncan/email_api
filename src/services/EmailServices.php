@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class EmailServices
 {
-  public function mailer(string $subject, string $customer_email, string $customer_phone_number, string $customer_name, string $mail_content)
+  public function mailer(string $subject, string $customer_email, string $customer_phone_number, string $customer_name, string $mail_content, string $customer_address): PHPMailer
   {
     //SERVER SETTINGS
     $mail = new PHPMailer(true);
@@ -19,7 +19,7 @@ class EmailServices
     $mail->Port = $_ENV['PORT'];
 
     //RECIPIENTs
-    $mail->setFrom($_ENV['USERNAME'], $customer_name );
+    $mail->setFrom($_ENV['USERNAME'], $customer_name);
     $mail->addAddress($_ENV['RECIPIENT_EMAIL'], '');
     $mail->addReplyTo($customer_email, $customer_name);
 
@@ -27,7 +27,7 @@ class EmailServices
     $mail->isHTML(true);
     $mail->Subject = $subject;
     ob_start();
-    include(__DIR__ ."/../Templates/emailTemplate.php");
+    include(__DIR__ . "/../Templates/emailTemplate.php");
     $mail->Body = ob_get_contents();
     ob_get_clean();
 

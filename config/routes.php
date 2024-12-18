@@ -9,9 +9,4 @@ $app->get("/", function (Request $req, Response $res) use ($app) {
   echo "Hello world";
   return $res;
 });
-$app->get("/hello_world", function (Request $req, Response $res) use ($app) {
-
-  $email = new EmailController();
-  $email->sendEmail();
-  return $res;
-});
+$app->post("/send_mail", [EmailController::class, 'sendEmail']);

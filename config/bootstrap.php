@@ -9,6 +9,7 @@ $dotEnv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotEnv->load();
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
+$app->addBodyParsingMiddleware();
 
 $app->addErrorMiddleware(true, true, true);
 $app->add(ResponseMiddleware::class);
