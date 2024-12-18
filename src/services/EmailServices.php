@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use App\Services;
+namespace App\Services;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class EmailServices
 {
-  public function mailer(string $subject)
+  public function mailer(string $subject, string $customer_email, string $customer_phone_number, string $customer_name, string $mail_content)
   {
     //SERVER SETTINGS
     $mail = new PHPMailer(true);
@@ -19,12 +19,20 @@ class EmailServices
     $mail->Port = $_ENV['PORT'];
 
     //RECIPIENTs
-    $mail->setFrom($_ENV['USERNAME'], 'Mailer');
+    $mail->setFrom($_ENV['USERNAME'], $customer_name );
     $mail->addAddress($_ENV['RECIPIENT_EMAIL'], '');
+    $mail->addReplyTo($customer_email, $customer_name);
 
     //Content
     $mail->isHTML(true);
     $mail->Subject = $subject;
+    ob_start();
+    include(__DIR__ ."/../Templates/emailTemplate.php");
+    $mail->Body = ob_get_contents();
+    ob_get_clean();
+
+
+    return $mail;
 
   }
 }
