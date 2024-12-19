@@ -1,8 +1,15 @@
 {
-    "require": {
-        "selective/basepath": "^2.2",
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.7",
-        "vlucas/phpdotenv": "^5.6"
+  "require": {
+    "selective/basepath": "^2.2",
+    "slim/slim": "4.*",
+    "slim/psr7": "^1.7",
+    "vlucas/phpdotenv": "^5.6",
+    "phpmailer/phpmailer": "^6.9",
+    "vlucas/valitron": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
     }
+  }
 }
