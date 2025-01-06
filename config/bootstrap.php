@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Middlewares\CorsMiddleware;
 use App\Middlewares\ResponseMiddleware;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\Factory\AppFactory;
@@ -13,7 +14,9 @@ $app = AppFactory::create();
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
 $app->add(new BasePathMiddleware($app));
+$app->add(new CorsMiddleware($app));
 $error_middleware = $app->addErrorMiddleware(true, true, true);
+
 $error_handler = $error_middleware->getDefaultErrorHandler();
 $error_handler->forceContentType('application/json');
 

@@ -28,7 +28,7 @@ COPY . .
 
 # Set permissions for the web server to access the files
 RUN chown -R www-data:www-data /var/www/html/api/
-RUN chmod -R 755 /var/www/html/api
+RUN chmod -R 755 /var/www/html/api/
 
 # Install composer dependencies
 RUN composer dump-autoload
